@@ -1,0 +1,101 @@
+name: Deploy Params to Azure Blob Storage
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AZURE_STORAGE_ACCOUNT_NAME: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
+  AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+  BLOB_DESTINATION_FOLDER: "params-shell"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  upload_params_to_azure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Log in to Azure with OIDC
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Prepare files for upload using rsync
+        id: prepare_files
+        run: |
+          echo "Checking for rsync..."
+          if ! command -v rsync &> /dev/null; then
+            echo "rsync not found, attempting to install..."
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq rsync
+          else
+            echo "rsync found."
+          fi
+
+          # Create temporary directory within GITHUB_WORKSPACE
+          # mktemp -p allows specifying parent directory. -d for directory.
+          # This creates a directory like /home/runner/work/your-repo/your-repo/upload_temp.XXXXXX
+          TEMP_UPLOAD_DIR_ABSOLUTE=$(mktemp -d -p "${{ github.workspace }}" upload_temp.XXXXXX)
+          echo "Temporary directory for upload (absolute path on runner): ${TEMP_UPLOAD_DIR_ABSOLUTE}"
+
+          # Get the name of the temporary directory (relative to GITHUB_WORKSPACE)
+          TEMP_UPLOAD_SOURCE_DIR_NAME=$(basename "${TEMP_UPLOAD_DIR_ABSOLUTE}")
+          echo "Temporary directory name (relative to GITHUB_WORKSPACE): ${TEMP_UPLOAD_SOURCE_DIR_NAME}"
+
+          # Set environment variables for subsequent steps
+          echo "TEMP_UPLOAD_PATH_FOR_AZ_CLI=${TEMP_UPLOAD_SOURCE_DIR_NAME}" >> $GITHUB_ENV
+          echo "TEMP_UPLOAD_DIR_FOR_CLEANUP=${TEMP_UPLOAD_DIR_ABSOLUTE}" >> $GITHUB_ENV
+
+          SOURCE_ROOT_DIR="./" # Relative to GITHUB_WORKSPACE
+          echo "Preparing files for upload from ${SOURCE_ROOT_DIR} to ${TEMP_UPLOAD_DIR_ABSOLUTE}/"
+          rsync -a --exclude ".git" --exclude ".github" "${SOURCE_ROOT_DIR}/" "${TEMP_UPLOAD_DIR_ABSOLUTE}/"
+          
+          if [ -z "$(ls -A ${TEMP_UPLOAD_DIR_ABSOLUTE})" ]; then
+            echo "Temporary directory ${TEMP_UPLOAD_DIR_ABSOLUTE} is empty after rsync. Nothing to upload."
+            echo "UPLOAD_DIR_IS_EMPTY=true" >> $GITHUB_ENV
+          else
+            echo "Files prepared in ${TEMP_UPLOAD_DIR_ABSOLUTE}. Count: $(ls -A ${TEMP_UPLOAD_DIR_ABSOLUTE} | wc -l)"
+            echo "UPLOAD_DIR_IS_EMPTY=false" >> $GITHUB_ENV
+          fi
+
+      - name: Upload params to Azure Blob Storage
+        if: env.UPLOAD_DIR_IS_EMPTY == 'false'
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            echo "Uploading contents of directory ${{ env.TEMP_UPLOAD_PATH_FOR_AZ_CLI }} (relative to GITHUB_WORKSPACE) to Azure Blob Storage..."
+            echo "Storage Account: ${{ env.AZURE_STORAGE_ACCOUNT_NAME }}"
+            echo "Container: ${{ env.AZURE_STORAGE_CONTAINER_NAME }}"
+            echo "Blob Destination Path: ${{ env.BLOB_DESTINATION_FOLDER }}"
+
+            # The azure/CLI action's working directory is /github/workspace.
+            # TEMP_UPLOAD_PATH_FOR_AZ_CLI is the name of the directory inside GITHUB_WORKSPACE.
+            az storage blob upload-batch \
+              --account-name "${{ env.AZURE_STORAGE_ACCOUNT_NAME }}" \
+              --destination "${{ env.AZURE_STORAGE_CONTAINER_NAME }}" \
+              --source "${{ env.TEMP_UPLOAD_PATH_FOR_AZ_CLI }}" \
+              --destination-path "${{ env.BLOB_DESTINATION_FOLDER }}" \
+              --auth-mode login \
+              --overwrite true
+            echo "Upload complete."
+
+      - name: Clean up temporary directory
+        if: always() && env.TEMP_UPLOAD_DIR_FOR_CLEANUP
+        run: |
+          echo "Cleaning up temporary directory: ${{ env.TEMP_UPLOAD_DIR_FOR_CLEANUP }}"
+          rm -rf "${{ env.TEMP_UPLOAD_DIR_FOR_CLEANUP }}"
+          echo "Temporary directory cleaned up."
+                        
+      - name: Azure logout
+        if: always()
+        run: |
+          az logout
+          echo "Azure logout completed."

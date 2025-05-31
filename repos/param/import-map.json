@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "@techschool/root-config": "https://storagemfe.blob.core.windows.net/mfe-params/shell/0.0.6/techschool-root-config.js",
+    "@techschool/params-mfe": "https://storagemfe.blob.core.windows.net/mfe-params/params-shell/params-mfe.js",
+    "@techschool/params-shell": "https://storagemfe.blob.core.windows.net/mfe-params/params-shell/params-shell.js",
+    "@techschool/mfe-navbar": "https://storagemfe.blob.core.windows.net/mfe-params/mfe-navbar/0.0.1/techschool-mfe-navbar.js",
+    "@techschool/mfe-hero-banner": "https://storagemfe.blob.core.windows.net/mfe-params/mfe-hero-banner/0.0.1/techschool-mfe-hero-banner.js",
+    "@techschool/mfe-movies-categories": "https://storagemfe.blob.core.windows.net/mfe-params/mfe-movies-categories/0.0.1/techschool-mfe-movies-categories.js",
+    "@techschool/mfe-footer": "https://storagemfe.blob.core.windows.net/mfe-params/mfe-footer/0.0.1/techschool-mfe-footer.js"
+  }
+}

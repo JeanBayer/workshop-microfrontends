@@ -1,0 +1,79 @@
+{
+  "name": "@techschool/mfe-movies-categories",
+  "name-repository": "mfe-movies-categories",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "webpack serve --port 2025",
+    "start:standalone": "webpack serve --env standalone",
+    "build": "concurrently npm:build:*",
+    "build:webpack": "webpack --mode=production",
+    "analyze": "webpack --mode=production --env analyze",
+    "lint": "eslint src --ext js,ts,tsx",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "test": "cross-env BABEL_ENV=test jest",
+    "watch-tests": "cross-env BABEL_ENV=test jest --watch",
+    "prepare": "husky install",
+    "coverage": "cross-env BABEL_ENV=test jest --coverage"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@tanstack/eslint-plugin-query": "^5.74.7",
+    "@tanstack/react-query-devtools": "^5.77.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "babel-jest": "^29.7.0",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "dotenv-webpack": "^8.1.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react": "^7.37.5",
+    "husky": "^9.1.7",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-canvas-mock": "^2.5.2",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-fixed-jsdom": "^0.0.9",
+    "msw": "^2.8.4",
+    "prettier": "^3.5.3",
+    "ts-config-single-spa": "^3.0.0",
+    "ts-jest": "^29.3.4",
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-config-single-spa-react-ts": "^8.0.0",
+    "webpack-dev-server": "^5.2.1",
+    "webpack-merge": "^6.0.1"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.77.0",
+    "axios": "^1.9.0",
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "single-spa": "^6.0.3",
+    "single-spa-react": "^6.0.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./eslintrc.json",
+      "./node_modules/ts-standard/eslintrc.json"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    }
+  },
+  "types": "dist/devschool-mfe-movies-categories.d.ts"
+}

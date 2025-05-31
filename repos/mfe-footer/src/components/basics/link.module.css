@@ -1,0 +1,14 @@
+.link {
+  text-decoration: none;
+}
+
+.socialLink {
+  color: #e5e5e5;
+}
+
+.footerLink {
+  color: #808080;
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "extends": "ts-config-single-spa",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "declarationDir": "dist",
+    "strict": true,
+    "types": ["node", "jest"],
+    "baseUrl": "./src",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@hooks/*": ["hooks/*"],
+      "@mocks/*": ["mocks/*"],
+      "@services/*": ["services/*"],
+      "@type/*": ["type/*"],
+      "@utils/*": ["utils/*"],
+      "@main/*": ["./*"]
+    }
+  },
+  "include": ["src/**/*", "src/__mocks__"],
+  "exclude": ["node_modules", "dist"]
+}

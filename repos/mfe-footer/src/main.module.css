@@ -1,0 +1,16 @@
+.footer {
+  background-color: #141414;
+  padding: 50px 4%;
+  color: #808080;
+  margin-top: 20px;
+}
+
+.footerContent {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.copyright {
+  font-size: 12px;
+  margin-top: 20px;
+}

@@ -1,0 +1,11 @@
+.icon {
+  color: white;
+  margin-left: 22px;
+  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

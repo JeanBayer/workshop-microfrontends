@@ -1,0 +1,30 @@
+{
+    "extends": "ts-config-single-spa",
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "declarationDir": "dist",
+      "strict": true,
+      "types": ["node", "jest"],
+      "baseUrl": "./src",
+      "paths": {
+        "@api/*": ["api/*"],
+        "@assets/*": ["assets/*"],
+        "@components/*": ["components/*"],
+        "@constants/*": ["constants/*"],
+        "@hooks/*": ["hooks/*"],
+        "@mocks/*": ["mocks/*"],
+        "@services/*": ["services/*"],
+        "@type/*": ["type/*"],
+        "@utils/*": ["utils/*"],
+        "@main/*": ["./*"]
+      }
+    },
+    // "files": ["src/devschool-mfe-system.tsx"], // Remove this line
+    "include": ["src/**/*", "src/mocks"], // This will now be respected
+    "exclude": [
+      // "src/**/*.test*", // Remove or comment out this line
+      "node_modules", // It's good practice to keep excluding node_modules
+      "dist" // And the output directory
+    ]
+  }
+  

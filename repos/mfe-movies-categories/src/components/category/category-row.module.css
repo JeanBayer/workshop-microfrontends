@@ -1,0 +1,9 @@
+.movieRow {
+  margin-bottom: 40px;
+}
+
+.rowTitle {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
