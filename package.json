@@ -1,0 +1,32 @@
+{
+  "name": "workshop-microfrontends",
+  "version": "1.0.0",
+  "description": "Este repositorio contiene el material de apoyo para la charla sobre microfrontends presentada por [Dayan Arango](https://github.com/dayanMichelle). El objetivo es explorar los conceptos fundamentales de los microfrontends y cómo implementarlos utilizando diferentes tecnologías y enfoques.",
+  "main": "index.js",
+  "scripts": {
+    "i:all-nvm": "source ~/.nvm/nvm.sh && nvm use && concurrently \"npm:install:*\"",
+    "i:all": "concurrently \"npm:install:*\"",
+    "install:footer": "cd repos/mfe-footer && npm install; npm start",
+    "install:banner": "cd repos/mfe-hero-banner && npm install; npm start",
+    "install:categories": "cd repos/mfe-movies-categories && npm install; npm start",
+    "install:navbar": "cd repos/mfe-navbar && npm install; npm start",
+    "install:movie-detail": "cd tips/mfe-movie-detail && npm install; npm start",
+    "install:shell": "cd tips/shell-dev && npm install; npm start",
+    "install:server": "cd repos/server-node && npm install; npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dayanMichelle/workshop-microfrontends.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dayanMichelle/workshop-microfrontends/issues"
+  },
+  "homepage": "https://github.com/dayanMichelle/workshop-microfrontends#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "npm-run-all": "^4.1.5"
+  }
+}
