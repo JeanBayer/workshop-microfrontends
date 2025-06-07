@@ -1,9 +1,17 @@
+import { useGSAP } from "@gsap/react";
 import { HeroBanner } from "@main/main";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import React from "react";
 import * as ReactDOMClient from "react-dom/client";
 import singleSpaReact from "single-spa-react";
+
+gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 const queryClient = new QueryClient();
 

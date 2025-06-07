@@ -24,10 +24,16 @@ describe("HeroBanner", () => {
       expect(screen.getByText("Titanic")).toBeInTheDocument();
     });
     expect(
-      screen.getByText(
+      screen.getByLabelText(
         "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic."
       )
     ).toBeInTheDocument();
+
+    // description fragmented by the gsap animation
+    expect(screen.getByText("seventeen-year-old")).toBeInTheDocument();
+    expect(screen.getByText("artist")).toBeInTheDocument();
+    expect(screen.getByText("ill-fated")).toBeInTheDocument();
+
     expect(screen.getByAltText("Titanic")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Play" })).toBeInTheDocument();
     expect(
