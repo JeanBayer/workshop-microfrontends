@@ -10,17 +10,17 @@
     "i:all-nvm": "source ~/.nvm/nvm.sh && nvm use && concurrently \"npm:install:*\"",
     "i:all": "concurrently \"npm:install:*\"",
     "c:all": "concurrently \"npm:clean:*\"",
-    "install:footer": "cd repos/mfe-footer && npm install; npm start",
-    "install:banner": "cd repos/mfe-hero-banner && cp .env-example .env && npm install; npm start",
-    "install:categories": "cd repos/mfe-movies-categories && cp .env-example .env && npm install; npm start",
-    "install:navbar": "cd repos/mfe-navbar && npm install; npm start",
+    "install:footer": "cd packages/mfe-footer && npm install; npm start",
+    "install:banner": "cd packages/mfe-hero-banner && cp .env-example .env && npm install; npm start",
+    "install:categories": "cd packages/mfe-movies-categories && cp .env-example .env && npm install; npm start",
+    "install:navbar": "cd packages/mfe-navbar && npm install; npm start",
     "install:movie-detail": "cd tips/mfe-movie-detail && cp .env-example .env && npm install; npm start",
     "install:shell": "cd tips/shell-dev && npm install; npm start",
     "install:server": "cd repos/server-node && npm install; npm start",
-    "clean:footer": "cd repos/mfe-footer && rm -rf node_modules package-lock.json",
-    "clean:banner": "cd repos/mfe-hero-banner && rm -rf node_modules package-lock.json",
-    "clean:categories": "cd repos/mfe-movies-categories && rm -rf node_modules package-lock.json",
-    "clean:navbar": "cd repos/mfe-navbar && rm -rf node_modules package-lock.json",
+    "clean:footer": "cd packages/mfe-footer && rm -rf node_modules package-lock.json",
+    "clean:banner": "cd packages/mfe-hero-banner && rm -rf node_modules package-lock.json",
+    "clean:categories": "cd packages/mfe-movies-categories && rm -rf node_modules package-lock.json",
+    "clean:navbar": "cd packages/mfe-navbar && rm -rf node_modules package-lock.json",
     "clean:movie-detail": "cd tips/mfe-movie-detail && rm -rf node_modules package-lock.json",
     "clean:shell": "cd tips/shell-dev && rm -rf node_modules package-lock.json",
     "clean:server": "cd repos/server-node && rm -rf node_modules package-lock.json"
@@ -39,5 +39,8 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "npm-run-all": "^4.1.5"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

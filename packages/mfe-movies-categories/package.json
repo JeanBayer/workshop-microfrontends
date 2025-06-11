@@ -1,9 +1,9 @@
 {
-  "name": "@techschool/mfe-x",
-  "name-repository": "mfe-x",
+  "name": "@techschool/mfe-movies-categories",
+  "name-repository": "mfe-movies-categories",
   "version": "0.0.1",
   "scripts": {
-    "start": "webpack serve --port 2027",
+    "start": "webpack serve --port 2025",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
@@ -26,6 +26,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
@@ -47,17 +48,19 @@
     "msw": "^2.8.4",
     "prettier": "^3.5.3",
     "ts-config-single-spa": "^3.0.0",
+    "ts-jest": "^29.3.4",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "typescript": "^5.8.3",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
-    "webpack-config-single-spa-react-ts": "^8.0.0",
+    "webpack-config-single-spa-react-ts": "^6.0.0",
     "webpack-dev-server": "^5.2.1",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.77.0",
     "axios": "^1.9.0",
+    "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "single-spa": "^6.0.3",
@@ -72,5 +75,5 @@
       "project": "./tsconfig.json"
     }
   },
-  "types": "dist/devschool-mfe-x.d.ts"
+  "types": "dist/devschool-mfe-movies-categories.d.ts"
 }

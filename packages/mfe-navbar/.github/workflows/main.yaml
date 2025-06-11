@@ -20,6 +20,9 @@ permissions:
 jobs:
   build_and_upload_to_azure:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/mfe-navbar
     # Opcional: Si configura un entorno en GitHub para reglas de protección o secretos específicos del entorno
     # environment: production
 

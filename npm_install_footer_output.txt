@@ -1,0 +1,29 @@
+
+> workshop-microfrontends@1.0.0 install:footer
+> cd packages/mfe-footer && npm install; npm start
+
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'workshop-microfrontends@1.0.0',
+npm WARN EBADENGINE   required: { node: '22' },
+npm WARN EBADENGINE   current: { node: 'v18.19.1', npm: '9.2.0' }
+npm WARN EBADENGINE }
+
+up to date, audited 1120 packages in 4s
+
+208 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> @techschool/mfe-footer@0.0.1 start
+> webpack serve --port 2026
+
+<i> [webpack-dev-server] Project is running at:
+<i> [webpack-dev-server] Loopback: http://localhost:2026/, http://[::1]:2026/
+<i> [webpack-dev-server] On Your Network (IPv4): http://192.168.0.2:2026/
+<i> [webpack-dev-server] Content not from webpack is served from '/app/packages/mfe-footer/public' directory
+<i> [webpack-dev-server] 404s will fallback to '/index.html'
+<i> [webpack-dev-server] Gracefully shutting down. To force exit, press ^C again. Please wait...
+RpcExitError: Process 20757 exited [SIGTERM]
+Issues checking service aborted - probably out of memory. Check the `memoryLimit` option in the ForkTsCheckerWebpackPlugin configuration.
+If increasing the memory doesn't solve the issue, it's most probably a bug in the TypeScript.
